@@ -13,27 +13,27 @@ module.exports.getTickets = async (request, response) => {
 }
 
 module.exports.bookTicket = async (request, response) => {
-    const id = request.params._id;
-const ticketInfo = {
-    status: request.body.status,
-}
-const findTicket = await ticketSerive.findTicket(id);
-if(findTicket ==  id){
+    const ticketId = request.params.id;
+    const ticketInfo = request.body;
+    console.log(ticketInfo);
     try {
-        const ticketUpdated = await ticketSerive.bookTicket(ticketInfo);
-        return response.status(200).send({
-            msg: "Ticket is booked",
-            ticketId: ticketUpdated._id,
-        });
+        const ticket = await ticketSerive.findTicket(ticketId);
+        if (ticket._id != ticketId) {
+            response.status(404);
+            response.send({
+                error: "Ticket not found"
+            });
+        }else{
+            const ticketBooked = await ticketSerive.bookTicket(ticketInfo, ticketId);
+            return response.status(201).send({
+                message: 'Ticket booked successfully',
+                status: ticketInfo,
+            });
+        }
     } catch (error) {
-        return response.status(500).send({
-            error: "Can't book ticket",
-        })
+        response.status(500).send({
+            error: error.message,
+        });
     }
-}else{
-    return response.status(404).send({
-        error: "Invalid ticket ID",
-    })
-}
 
 }

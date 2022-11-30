@@ -1,4 +1,5 @@
 const ticketModel = require('../models/ticketModel');
+const { lock } = require('../routers/ticketRoute');
 
 module.exports.findAllTickets = async () => {
     try {
@@ -10,24 +11,33 @@ module.exports.findAllTickets = async () => {
     }
 };
 
-module.exports.bookTicket = async (ticketInfo) =>{
+module.exports.bookTicket = async (ticketInfo, ticketID) =>{
     try {
         const ticket = new ticketModel({
             status: ticketInfo.status,
         });
-        const ticketBooked = await ticket.save();
+        const ticketBooked = await ticket.updateOne({status: ticketInfo.status}).where('_id').equals(ticketID);
+        console.log(ticketBooked);
         return ticketBooked;
         
     } catch (error) {
+        console.log(error);
         throw new Error('Error while booking ticket');
+        
     }
 }
 
 module.exports.findTicket = async (ticketId) => {
     try {
-        const ticket = await ticketModel.findById(ticketId);
-        return ticket;
-    } catch (error) { 
+        const ticketAvailble = await ticketModel.findById({_id: ticketId});
+        if(ticketAvailble){
+            console.log(ticketAvailble);
+            return ticketAvailble;
+        }else {
+            return false;
+        }
+    } catch (error) {
         throw new Error('Error while finding ticket');
     }
+
 }
