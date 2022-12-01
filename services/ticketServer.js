@@ -42,18 +42,28 @@ module.exports.findTicket = async (ticketId) => {
 
 }
 
-module.exports.upgradeTIcket = async (ticketInfo, ticketID) =>{
+// module.exports.upgradeTIcket = async (ticketInfo, ticketID) =>{
+//     try {
+//         const ticket = new ticketModel({
+//             class: ticketInfo.class,
+//         });
+//         const ticketBooked = await ticket.updateOne({class: ticketInfo.class}).where('_id').equals(ticketID);
+//         console.log(ticketBooked);
+//         return ticketBooked;
+        
+//     } catch (error) {
+//         console.log(error);
+//         throw new Error('Error while updating ticket');
+        
+//     }
+// }
+
+module.exports.editTicket = async (ticket, ticketInfo) =>{
     try {
-        const ticket = new ticketModel({
-            class: ticketInfo.class,
-        });
-        const ticketBooked = await ticket.updateOne({class: ticketInfo.class}).where('_id').equals(ticketID);
-        console.log(ticketBooked);
-        return ticketBooked;
-        
+        const ticketEdited = await ticketModel.findByIdAndUpdate(ticket._id,ticketInfo);
+        return ticketEdited;
     } catch (error) {
-        console.log(error);
-        throw new Error('Error while updating ticket');
-        
+        throw new Error('Error while editing ticket');
     }
 }
+

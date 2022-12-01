@@ -5,6 +5,8 @@ const ticketsRouter = Router();
 
 ticketsRouter.get('/', ticketController.getTickets);
 ticketsRouter.put('/bookticket/:id', ticketController.bookTicket);
-ticketsRouter.put('/uprgadeticket/:id', ticketController.upgradeTicket);
+ticketsRouter.put('/cancelreservation/:id', ticketController.cancelBooking);
+ticketsRouter.put('/upgradeticket/:id', ticketController.upgradeTicket);
+ticketsRouter.put('/editticket/:id', ticketController.editTicket);
 
 module.exports = ticketsRouter;
