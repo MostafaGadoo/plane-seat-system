@@ -4,8 +4,8 @@ Content-Type: application/json
 {
       "Date": "2/12/2022",
       "Departure_Time": "8 pm",
-      "Departure_loc": "Cairo",
+      "Departure_loc": "Dubai",
       "Arrival_loc": "Qatar",
-      "Plane_No": 1
+      "Plane_No": 6
     
 }

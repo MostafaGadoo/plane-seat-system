@@ -11,7 +11,7 @@ module.exports.GetAllFeedback=async()=>{
 }
 module.exports.MakeFeedback=async(FeedbackInfo)=>{
     try {
-        const Feedback=new ComplaintsModel({
+        const Feedback=new FeedbackModel({
             description:FeedbackInfo.description,
             date:FeedbackInfo.date,
             email:FeedbackInfo.email,

@@ -1,5 +1,5 @@
 const {Schema,model}=require("mongoose")
-//Complaints:customer_id,description,date,Ticket_id,email
+
 const FeedbackSchema=new Schema({
 description:{
     type:"String",
@@ -15,7 +15,7 @@ email:{
 },
 Ticket_id:{
     type:Schema.Types.ObjectId,
-    ref:"ticket",
+    ref:"tickets",
     required:true
 },
 customer_id:{
@@ -25,5 +25,5 @@ customer_id:{
 }
 
 })
-const FeedbackModel=model("Complaint",FeedbackSchema);
+const FeedbackModel=model("Feedback",FeedbackSchema);
 module.exports=FeedbackModel;
