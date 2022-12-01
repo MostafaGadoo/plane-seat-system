@@ -1,0 +1,11 @@
+POST http://localhost:3000/Feedbacks
+Content-Type: application/json
+
+{
+    "description":"the services are bad",
+    "date":"2/12/2022",
+    "email":"ahmed@gmail.com",
+    "Ticket_id":"6388dfcc59d3747cc62c1d6b",
+    "customer_id":"6388dfcc59d3747cc62c1d888"
+    
+}

@@ -23,7 +23,7 @@ const FlightSchema=new Schema({
     Plane_No:{
         type:"Number",
         required:true
-    },
+    }
 });
 const FlightModel=model("Flight",FlightSchema)
 module.exports=FlightModel;

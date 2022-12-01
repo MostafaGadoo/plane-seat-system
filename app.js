@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const FlightRouter=require("./routes/Flight")
 const initiateDBConnection = require('./config/db');
+const ComplaintRouter=require("./routes/Complaint")
+const FeedbackRouter=require("./routes/Feedback")
 
 dotenv.config({
     path: './config/.env',
@@ -14,6 +16,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use("/Flights",FlightRouter);
+app.use("/Complaints",ComplaintRouter);
+app.use("/Feedbacks",FeedbackRouter)
 
 
 app.listen(PORT, async () => {
