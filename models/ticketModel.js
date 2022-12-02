@@ -3,39 +3,39 @@ const {Schema, model} = require('mongoose');
 const ticketSchema = new Schema({
     date: { 
         type:'String',
-        required : false,
+        required : true,
     },
     departureTime: {
         type: 'String',
-        required: false,
+        required: true,
     },
     departureLocation: {
         type: 'String',
-        required: false,
+        required: true,
     },
     arrivalLocation: {
         type: 'String',
-        required: false,
+        required: true,
     },
     seatNumber: {
         type: 'String',
-        required: false,
+        required: true,
     },
     price: {
         type: 'String',
-        required: false,
+        required: true,
     },
     class: {
         type: 'String',
-        required: false,
+        required: true,
     },
     status: {
         type: 'String',
-        required: false,
+        required: true,
     },
     flightID: {
         type: 'String',
-        required: false,
+        required: true,
     },
 
 });
