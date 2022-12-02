@@ -24,3 +24,22 @@ module.exports.AddFlight=async(FlightInfo)=>{
         
     }
 }
+module.exports.GetFlightbyID=async(flight_id)=>{
+    try {
+        const flight= await FlightModel.findById(flight_id).populate('_id')
+        return flight
+    } catch (error) {
+        throw new Error("could not find flight")
+    }
+}
+
+module.exports.UpdateFlight=async(flight_id,FlightInfo)=>{
+    try {
+       
+        const UpdatedFlight=await FlightModel.findByIdAndUpdate(flight_id,FlightInfo)  ;
+        return UpdatedFlight;
+    } catch (error) {
+        throw new Error("could not update Flight");
+        
+    }
+}

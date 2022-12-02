@@ -16,6 +16,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use("/Flights",FlightRouter);
+app.use("/Flights/:flight_id",FlightRouter);
 app.use("/Complaints",ComplaintRouter);
 app.use("/Feedbacks",FeedbackRouter)
 
