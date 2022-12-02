@@ -5,6 +5,7 @@ const FlightRouter=require("./routes/Flight")
 const initiateDBConnection = require('./config/db');
 const ComplaintRouter=require("./routes/Complaint")
 const FeedbackRouter=require("./routes/Feedback")
+const ReportRouter=require("./routes/Report-lost-luggage")
 
 dotenv.config({
     path: './config/.env',
@@ -19,7 +20,7 @@ app.use("/Flights",FlightRouter);
 
 app.use("/Complaints",ComplaintRouter);
 app.use("/Feedbacks",FeedbackRouter)
-
+app.use("/Reports",ReportRouter)
 
 app.listen(PORT, async () => {
     console.log(`Server has been started and is listening to port ${PORT}`);
