@@ -21,7 +21,7 @@ module.exports.MakeReport=async(ReportInfo)=>{
         const createdReport=await Report.save();
         return createdReport;
     } catch (error) {
-       error:error.message
+        throw new Error("could not add Report");
         
     }
 }
