@@ -1,4 +1,4 @@
-const ReportServices=require("../services/Report-lost-luggage");
+const ReportServices=require("../services/Report-lost-luggage")
 module.exports.GetReport=async(req,res)=>{
     try {
         const Report=await ReportServices.GetAllReports();
@@ -12,22 +12,23 @@ module.exports.GetReport=async(req,res)=>{
     }
 }
 module.exports.MakeReport=async(req,res)=>{
-        const ReportInfo={
-            flight_id:req.body.flight_id,
-            name:req.body.name,
-            email:req.body.email,
-            Ticket_id:req.body.Ticket_id,
-            luggage_description:req.body.luggage_description
-        }
-        try {
-            const SubmitReport=await ReportServices.MakeReport(ReportInfo);
-            return res.status(201).send({
-                msg:"Report created successfully",
-                Report_id:SubmitReport._id
-            })
-        } catch (err) {
-            return res.status(500).send({
-                error:err.message
-            })
-        }
+    try{
+    const ReportInfo={
+        name:req.body.name,
+        email:req.body.email,
+        luggage_description:req.body.luggage_description,
+        Ticket_id:req.body.Ticket_id,
+        flight_id:req.body.flight_id
+    }
+    const createdReport=await ReportServices.MakeReport(ReportInfo);
+    return res.status(201).send({
+        msg:"Created Report successfully",
+        Report_id:createdReport._id
+    })
+}
+    catch (error) {
+        return res.status(500).send({
+            error:error.message
+        })
+    }
 }

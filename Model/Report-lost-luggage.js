@@ -1,11 +1,6 @@
 const {Schema,model}=require("mongoose");
-//fih el flightID, name, email bot3 eluser w eih elluggage which he los
 const ReportSchema=new Schema({
-    flight_id:{
-        type:Schema.Types.ObjectId,
-        ref:"flights",
-        required:true
-    },
+    
     name:{
         type:"String",
         required:true
@@ -14,13 +9,18 @@ const ReportSchema=new Schema({
         type:"String",
         required:true
     },
-    Ticket_id:{
+    luggage_description:{
+        type:"String",
+        required:true
+    },
+    ticket_id:{
         type:Schema.Types.ObjectId,
         ref:"tickets",
         required:true
     },
-    luggage_description:{
-        type:"String",
+    flight_id:{
+        type:Schema.Types.ObjectId,
+        ref:"flights",
         required:true
     }
     

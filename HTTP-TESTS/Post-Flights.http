@@ -2,10 +2,10 @@ POST http://localhost:3000/Flights
 Content-Type: application/json
 
 {
-      "Date": "2/12/2022",
+      "Date": "12/12/2022",
       "Departure_Time": "8 pm",
       "Departure_loc": "Dubai",
-      "Arrival_loc": "Qatar",
-      "Plane_No": 6
+      "Arrival_loc": "Cairo",
+      "Plane_No": 7
     
 }

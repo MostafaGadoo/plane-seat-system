@@ -9,21 +9,19 @@ module.exports.GetAllReports=async()=>{
         throw new Error("Could not retrive Reports")
     }
 }
-
 module.exports.MakeReport=async(ReportInfo)=>{
     try {
         const Report=new ReportModel({
-            flight_id:new ObjectId(ReportInfo.flight_id),
             name:ReportInfo.name,
             email:ReportInfo.email,
-            Ticket_id:new ObjectId(ReportInfo.Ticket_id),
             luggage_description:ReportInfo.luggage_description,
-      
-        });
-        const MakeReport=await Report.save();
-        return MakeReport;
+            ticket_id:new ObjectId(ReportInfo.ticket_id),
+            flight_id:new ObjectId(ReportInfo.flight_id)
+        })
+        const createdReport=await Report.save();
+        return createdReport;
     } catch (error) {
-        Error:error.message;
+       error:error.message
         
     }
 }

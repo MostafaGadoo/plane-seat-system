@@ -18,11 +18,11 @@ Ticket_id:{
     ref:"tickets",
     required:true
 },
-// customer_id:{
-//     type:Schema.Types.ObjectId,
-//     ref:"Customer",
-//     required:true
-// }
+customer_id:{
+    type:Schema.Types.ObjectId,
+    ref:"Customer",
+    required:true
+}
 
 })
 const ComplaintsModel=model("Complaint",complaintSchema);
