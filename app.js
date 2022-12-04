@@ -7,7 +7,7 @@ const ComplaintRouter=require("./routes/Complaint")
 const FeedbackRouter=require("./routes/Feedback")
 const ReportRouter=require("./routes/Report-lost-luggage")
 const AdminRouter=require("./routes/Admin")
-const ticketRouter = require('./routers/ticketRoute');
+const ticketRouter = require('./routes/ticketRoute');
 
 
 const initiateDBConnection = require('./config/db');
