@@ -1,5 +1,4 @@
-const ticketModel = require('../models/ticketModel');
-const { lock } = require('../routers/ticketRoute');
+const ticketModel = require('../Model/ticketModel');
 
 module.exports.findAllTickets = async () => {
     try {
