@@ -1,9 +1,0 @@
-POST http://localhost:3000/products
-Content-Type: application/json
-
-{
-    "name":"lenovo ideapad ",
-    "description":"A great Laptop ",
-    "price":30000.5
-    
-}
