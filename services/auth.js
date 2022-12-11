@@ -1,13 +1,31 @@
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 const AdminModel = require('../Model/Admin');
+const CustomerModel=require("../Model/Customer")
 
-const Admin = require('../Model/Admin');
+module.exports.createUser = async (CustomerInfo) => {
+  try {
 
+    let hashedpassword = await bcrypt.hash(CustomerInfo.Password, 12);
 
+    const newUser = new CustomerModel({
+      name:CustomerInfo.name,
+      username: CustomerInfo.username,
+      email:CustomerInfo.email,
+      Password: hashedpassword,
+      Address:CustomerInfo.Address,
+      DOB:CustomerInfo.DOB,
+      Gender: CustomerInfo.Gender
+    });
+
+      await newUser.save();
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 module.exports.doesUserExist = async (username) => {
-  const existingUser = await AdminModel.findOne({
+  const existingUser = await CustomerModel.findOne({
     username: username
   });
 
@@ -18,7 +36,7 @@ module.exports.doesUserExist = async (username) => {
   }
 };
 
-module.exports.checkCredentials = async (username, password) => {
+module.exports.checkCredentialsA = async (username, password) => {
   try {
     // find user that has the same username
     const Admin = await AdminModel.findOne({
@@ -37,11 +55,48 @@ module.exports.checkCredentials = async (username, password) => {
     throw new Error('Error logging in, please try again later.');
   }
 };
+module.exports.checkCredentials = async (username, password) => {
+  try {
+    // find user that has the same username
+    const Customer = await CustomerModel.findOne({
+      username: username
+    });
 
-module.exports.generateJWT = (Admin) => {
+    // compare the plaintext password with the user's hashed password in the db.
+    let isCorrectPassword = bcrypt.compare(password, Customer.Password);
+
+    if (isCorrectPassword) {
+      return Customer;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw new Error('Error logging in, please try again later.');
+  }
+};
+module.exports.generateAJWT = (Admin) => {
   const jwtPayload = {
     AdminId: Admin._id,
     username: Admin.username,
+    Type:"Admin"
+    
+    // if different users have different roles, you could put the role here too.
+  };
+
+  const jwtSecret = process.env.JWT_SECRET;
+
+  try {
+    let token = JWT.sign(jwtPayload, jwtSecret, { expiresIn: '1h' });
+    return token;
+  } catch (error) {
+    throw new Error('Failure to sign in, please try again later.');
+  }
+};
+module.exports.generateCJWT = (Customer) => {
+  const jwtPayload = {
+    Customer_id: Customer._id,
+    username: Customer.username,
+    Type:"Customer"
     
     // if different users have different roles, you could put the role here too.
   };
