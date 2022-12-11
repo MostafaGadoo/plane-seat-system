@@ -17,12 +17,8 @@ Ticket_id:{
     type:Schema.Types.ObjectId,
     ref:"tickets",
     required:true
-},
-customer_id:{
-    type:Schema.Types.ObjectId,
-    ref:"Customer",
-    required:true
 }
+
 
 })
 const FeedbackModel=model("Feedback",FeedbackSchema);

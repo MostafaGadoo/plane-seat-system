@@ -17,7 +17,7 @@ module.exports.MakeFeedback=async(req,res)=>{
             date:req.body.date,
             email:req.body.email,
             Ticket_id:req.body.Ticket_id,
-            customer_id:req.body.customer_id
+            
         }
         try {
             const SubmitFeedback=await FeedbackServices.MakeFeedback(FeedbackInfo);
