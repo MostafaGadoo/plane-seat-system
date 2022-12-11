@@ -15,7 +15,6 @@ module.exports.MakeFeedback=async(FeedbackInfo)=>{
             description:FeedbackInfo.description,
             date:FeedbackInfo.date,
             email:FeedbackInfo.email,
-            Ticket_id:new ObjectId(FeedbackInfo.Ticket_id),
           
       
         });

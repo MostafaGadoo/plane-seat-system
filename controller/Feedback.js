@@ -16,7 +16,6 @@ module.exports.MakeFeedback=async(req,res)=>{
             description:req.body.description,
             date:req.body.date,
             email:req.body.email,
-            Ticket_id:req.body.Ticket_id,
             
         }
         try {

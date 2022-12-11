@@ -2,7 +2,7 @@ const ticketModel = require('../Model/ticketModel');
 
 module.exports.findAllTickets = async () => {
     try {
-        const Ticket = await ticketModel.find();
+        const Ticket = await ticketModel.find({status: "Available"});
         return Ticket;
         
     } catch (error) {
