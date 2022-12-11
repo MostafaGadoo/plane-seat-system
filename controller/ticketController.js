@@ -11,26 +11,57 @@ module.exports.getTickets = async (request, response) => {
         });
     }
 }
-
-module.exports.bookTicket = async (request, response) => {
+module.exports.getTicket = async (request, response) => {
     try {
-        const ticketId = request.params.id;
-        const ticketInfo ={
-           status: request.body.status,
-        }
-        const ticket = await ticketSerive.findTicket(ticketId);
-        if(ticket._id != ticketId){
+        const ticket = await ticketSerive.findTicket(request.params.ticketId);
+        if(!ticket){
             response.status(404);
             response.send({
                 error: "Ticket not found"
             });
-        }else{
-            const ticektBooked = await ticketSerive.editTicket(ticket, ticketInfo);
-            response.status(201);
-            response.send({
+        }
+        return response.send({
+            ticket,
+        });
+    } catch (error) {
+        response.status(500).send(
+            {
+                error:error.message,
+            }
+        );
+    }
+}
+
+module.exports.bookTicket = async (request, response) => {
+    try {
+        const ticketId = request.params.id;
+        // const ticketInfo ={
+        //    status: request.body.status,
+        // }
+        const ticket = await ticketSerive.findTicket(ticketId);
+        // if(ticket._id != ticketId){
+        //     response.status(404);
+        //     response.send({
+        //         error: "Ticket not found"
+        //     });
+        // }else{
+            const ticketInfo = {
+                date: ticket.date,
+                departureTime: ticket.departureTime,
+                departureLocation: ticket.departureLocation,
+                arrivalLocation: ticket.arrivalLocation,
+                seatNumber: ticket.seatNumber,
+                price: ticket.price,
+                class: ticket.class,               
+                status: "Booked",
+                flightID: ticket.flightID,
+            };
+            const ticektBooked = await ticketSerive.editTicket(ticket._id, ticketInfo);
+            response.status(201).send({
+                ticektBooked,
                 message: "Ticket booked successfully"
             });
-        }
+        // }
     } catch (error) {
         response.status(500);
              response.send({
@@ -42,11 +73,21 @@ module.exports.bookTicket = async (request, response) => {
 module.exports.upgradeTicket = async (request, response) => {
     try {
         const ticket = await ticketSerive.findTicket(request.params.id);
+
         const ticketInfo = {
-            class: request.body.class,
-        }
-        const ticketUpgraded = await ticketSerive.editTicket(ticket, ticketInfo);
+            date: ticket.date,
+            departureTime: ticket.departureTime,
+            departureLocation: ticket.departureLocation,
+            arrivalLocation: ticket.arrivalLocation,
+            seatNumber: ticket.seatNumber,
+            price: ticket.price,
+            class: "Business",               
+            status: ticket.status,
+            flightID: ticket.flightID,
+        };
+        const ticketUpgraded = await ticketSerive.editTicket(ticket._id, ticketInfo);
         return response.status(201).send({
+            ticketUpgraded,
             message: 'Ticket upgraded successfully',
         });
        } catch (error) {
@@ -65,8 +106,9 @@ module.exports.editTicket = async (request, response) => {
         date: request.body.date,
         departureTime: request.body.departureTime,
     }
-    const ticketEdited = await ticketSerive.editTicket(ticket, ticketInfo);
+    const ticketEdited = await ticketSerive.editTicket(ticket._id, ticketInfo);
     return response.status(201).send({
+        ticketEdited,
         message: 'Ticket edited successfully',
     });
    } catch (error) {
@@ -81,10 +123,19 @@ module.exports.cancelBooking = async (request, response) => {
     try {
         const ticket = await ticketSerive.findTicket(request.params.id);
         const ticketInfo = {
-            status: request.body.status,
-        }
-        const ticketCanceled = await ticketSerive.editTicket(ticket, ticketInfo);
+            date: ticket.date,
+            departureTime: ticket.departureTime,
+            departureLocation: ticket.departureLocation,
+            arrivalLocation: ticket.arrivalLocation,
+            seatNumber: ticket.seatNumber,
+            price: ticket.price,
+            class: ticket.class,               
+            status: "Available",
+            flightID: ticket.flightID,
+        };
+        const ticketCanceled = await ticketSerive.editTicket(ticket._id, ticketInfo);
         return response.status(201).send({
+            ticketCanceled,
             message: 'Ticket canceled successfully',
         });
        } catch (error) {

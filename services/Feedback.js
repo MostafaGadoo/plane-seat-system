@@ -16,7 +16,7 @@ module.exports.MakeFeedback=async(FeedbackInfo)=>{
             date:FeedbackInfo.date,
             email:FeedbackInfo.email,
             Ticket_id:new ObjectId(FeedbackInfo.Ticket_id),
-            customer_id:new ObjectId(FeedbackInfo.customer_id)
+          
       
         });
         const MakeFeedback=await Feedback.save();

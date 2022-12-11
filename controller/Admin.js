@@ -1,4 +1,5 @@
 const AdminServices=require("../services/Admin");
+const AuthService=require("../services/auth")
 
 module.exports.GetAdmins=async(req,res)=>{
     try {
@@ -35,3 +36,30 @@ module.exports.AddAdmin=async(req,res)=>{
             })
         }
 }
+module.exports.postLogin = async (req, res) => {
+
+    const { username, password } = req.body;
+    try {
+     
+        const Admin = await AuthService.checkCredentialsA(username, password);
+      if (!Admin) {
+        return res.status(401).send({
+          error:
+            'Invalid credentials, please enter the correct username and password.'
+        });
+      }
+  
+      const jwt = await AuthService.generateAJWT(Admin);
+      res.send({
+        AdminId: Admin._id,
+        username: Admin.username,
+        type:"Admin",
+        jwt: jwt,
+        message: 'Logged in successfully.'
+      });
+    } catch (err) {
+      res.status(500).send({
+        error: err.message
+      });
+    }
+  };

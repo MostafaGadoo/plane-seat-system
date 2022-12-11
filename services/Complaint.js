@@ -1,10 +1,13 @@
+const { token } = require("morgan");
 const ComplaintsModel=require("../Model/Complaint");
 const {ObjectId}=require("mongoose").Types;
+
 module.exports.GetAllComplaints=async()=>{
     try {
+       
         const Complaint=await ComplaintsModel.find();
         return Complaint;
-
+        
     } catch (error) {
         throw new Error("Could not retrive Complaint")
     }
