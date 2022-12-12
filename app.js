@@ -8,7 +8,8 @@ const FeedbackRouter=require("./routes/Feedback")
 const ReportRouter=require("./routes/Report-lost-luggage")
 const AdminRouter=require("./routes/Admin")
 const ticketRouter = require('./routes/ticketRoute');
-const authRouter=require("./routes/auth")
+const authRouter=require("./routes/auth");
+const goflightlabs = require('./routes/goflightlabs');
 const initiateDBConnection = require('./config/db');
 
 
@@ -30,6 +31,7 @@ app.use("/Reports",ReportRouter)
 app.use("/Admins",AdminRouter)
 app.use("/tickets",ticketRouter)
 app.use("/auth",authRouter)
+app.use("/goflightlabs", goflightlabs);
 
 
 app.listen(PORT, async () => {

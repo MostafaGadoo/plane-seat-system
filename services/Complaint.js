@@ -1,6 +1,7 @@
 const { token } = require("morgan");
 const ComplaintsModel=require("../Model/Complaint");
 const {ObjectId}=require("mongoose").Types;
+const axios = require('axios');
 
 module.exports.GetAllComplaints=async()=>{
     try {
@@ -18,14 +19,23 @@ module.exports.MakeComplaint=async(ComplaintInfo)=>{
             description:ComplaintInfo.description,
             date:ComplaintInfo.date,
             email:ComplaintInfo.email,
-            Ticket_id:new ObjectId(ComplaintInfo.Ticket_id),
-            customer_id:new ObjectId(ComplaintInfo.customer_id)
+            Ticket_id: ComplaintInfo.Ticket_id,
+            customer_id:ComplaintInfo.customer_id
       
         });
+        // const addprop = await ComplaintsModel.findByIdAndUpdate({_id:Complaint._id}, {$push:{Complaint:Complaint._id}});
+        const confirmation = await Complaint.save();
+        const data= {
+            description: ComplaintInfo.description,
+            date: ComplaintInfo.date,
+            email: confirmation.email,
+            Ticket_id: ComplaintInfo.Ticket_id
+        }
+        axios.post(process.env.CONFERMATION ,data);
+
         const createdComplaint=await Complaint.save();
         return createdComplaint;
     } catch (error) {
-        throw new Error("could not add Complaint");
-        
+        console.log(error);
     }
 }
