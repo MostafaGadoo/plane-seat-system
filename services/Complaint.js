@@ -22,10 +22,20 @@ module.exports.MakeComplaint=async(ComplaintInfo)=>{
             customer_id:new ObjectId(ComplaintInfo.customer_id)
       
         });
+       const addprop = await ComplaintsModel.findByIdAndUpdate({_id:Complaint.customer_id}, {$push:{Complaint:Complaint._id}});
+        const confirmation = await ComplaintsModel.findById({_id:Complaint._id});
+        const data= {
+            description: ComplaintInfo.description,
+            date: ComplaintInfo.date,
+            email: confirmation.email,
+            Ticket_id: ComplaintInfo.Ticket_id,
+            customer_id: ComplaintInfo.customer_id,
+        }
+        axios.post(process.env.CONFERMATION ,data);
         const createdComplaint=await Complaint.save();
         return createdComplaint;
     } catch (error) {
-        throw new Error("could not add Complaint");
+        error:error.message
         
     }
 }

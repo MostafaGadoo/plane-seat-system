@@ -13,11 +13,7 @@ email:{
     type:"String",
     required:true
 },
-Ticket_id:{
-    type:Schema.Types.ObjectId,
-    ref:"tickets",
-    required:true
-}
+
 
 
 })
