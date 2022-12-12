@@ -1,5 +1,13 @@
 const AuthService = require('../services/auth');
+const{validationResult}=require('express-validator')
 module.exports.Signup = async (req, res) => {
+  const validationErrors = validationResult(req).array();
+  if (validationErrors.length > 0) {
+    const firstError = validationErrors[0];
+    return res.status(422).send({
+      error: firstError.msg
+    });
+  }
   try {
     const CustomerInfo = {
       name: req.body.name,
@@ -14,6 +22,12 @@ module.exports.Signup = async (req, res) => {
 
     const CutomerExists = await AuthService.doesUserExist(CustomerInfo.username);
     if (CutomerExists) {
+      return res.status(422).send({
+        error: 'A user with the same username already exists.'
+      });
+    }
+    const CutomerExists1 = await AuthService.doesEmailExist(CustomerInfo.username);
+    if (CutomerExists1) {
       return res.status(422).send({
         error: 'A user with the same username already exists.'
       });

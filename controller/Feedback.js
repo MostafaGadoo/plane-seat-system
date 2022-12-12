@@ -1,4 +1,5 @@
 const FeedbackServices=require("../services/Feedback");
+const{validationResult}=require('express-validator')
 module.exports.GetFeedback=async(req,res)=>{
     try {
         const Feedback=await FeedbackServices.GetAllFeedback();
@@ -12,6 +13,13 @@ module.exports.GetFeedback=async(req,res)=>{
     }
 }
 module.exports.MakeFeedback=async(req,res)=>{
+    const validationErrors = validationResult(req).array();
+    if (validationErrors.length > 0) {
+      const firstError = validationErrors[0];
+      return res.status(422).send({
+        error: firstError.msg
+      });
+    }
         const FeedbackInfo={
             description:req.body.description,
             date:req.body.date,
