@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv');
+
 const morgan = require('morgan');
 const cors = require('cors');
 const FlightRouter=require("./routes/Flight")
@@ -13,9 +13,6 @@ const goflightlabs = require('./routes/goflightlabs');
 const initiateDBConnection = require('./config/db');
 
 
-dotenv.config({
-    path: './config/.env',
-});
 
 const PORT = process.env.PORT || 3000;
 
