@@ -20,7 +20,7 @@ module.exports.MakeComplaint=async(ComplaintInfo)=>{
             date:ComplaintInfo.date,
             email:ComplaintInfo.email,
             Ticket_id: ComplaintInfo.Ticket_id,
-            customer_id:ComplaintInfo.customer_id
+            userName:ComplaintInfo.userName
       
         });
         // const addprop = await ComplaintsModel.findByIdAndUpdate({_id:Complaint._id}, {$push:{Complaint:Complaint._id}});
@@ -29,7 +29,9 @@ module.exports.MakeComplaint=async(ComplaintInfo)=>{
             description: ComplaintInfo.description,
             date: ComplaintInfo.date,
             email: confirmation.email,
-            Ticket_id: ComplaintInfo.Ticket_id
+            email: ComplaintInfo.email,
+            Ticket_id: ComplaintInfo.Ticket_id,
+            userName: ComplaintInfo.userName
         }
         axios.post(process.env.CONFERMATION ,data);
 

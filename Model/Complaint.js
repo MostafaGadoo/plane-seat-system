@@ -18,9 +18,8 @@ Ticket_id:{
     ref:"tickets",
     required:true
 },
-customer_id:{
-    type:Schema.Types.ObjectId,
-    ref:"Customer",
+userName:{
+    type:"String",
     required:true
 },
 

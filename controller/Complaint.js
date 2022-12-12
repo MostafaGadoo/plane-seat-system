@@ -27,7 +27,7 @@ module.exports.MakeComplaint=async(req,res)=>{
             date:req.body.date,
             email:req.body.email,
             Ticket_id:req.body.Ticket_id,
-            customer_id:req.body.customer_id
+            userName:req.body.userName
         }
         console.log(ComplaintInfo);
         try {
