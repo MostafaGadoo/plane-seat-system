@@ -24,9 +24,24 @@ module.exports.createUser = async (CustomerInfo) => {
   }
 };
 
-module.exports.doesUserExist = async (username) => {
+module.exports.doesUserExist = async (username,email) => {
   const existingUser = await CustomerModel.findOne({
-    username: username
+    username: username,
+    email:email
+
+  });
+
+  if (existingUser) {
+    return true;
+  } else {
+    return false;
+  }
+};
+module.exports.doesEmailExist = async (email) => {
+  const existingUser = await CustomerModel.findOne({
+  
+    email:email
+
   });
 
   if (existingUser) {

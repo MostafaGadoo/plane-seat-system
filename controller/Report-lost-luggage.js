@@ -1,4 +1,5 @@
 const ReportServices=require("../services/Report-lost-luggage")
+const{validationResult}=require('express-validator')
 module.exports.GetReport=async(req,res)=>{
     try {
         const Report=await ReportServices.GetAllReports();
@@ -12,6 +13,13 @@ module.exports.GetReport=async(req,res)=>{
     }
 }
 module.exports.MakeReport=async(req,res)=>{
+    const validationErrors = validationResult(req).array();
+    if (validationErrors.length > 0) {
+      const firstError = validationErrors[0];
+      return res.status(422).send({
+        error: firstError.msg
+      });
+    }
     try{
     const ReportInfo={
         name:req.body.name,
