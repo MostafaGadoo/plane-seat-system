@@ -15,7 +15,6 @@ email:{
 },
 
 
-
 })
 const FeedbackModel=model("Feedback",FeedbackSchema);
 module.exports=FeedbackModel;

@@ -29,6 +29,7 @@ module.exports.MakeComplaint=async(req,res)=>{
             Ticket_id:req.body.Ticket_id,
             customer_id:req.body.customer_id
         }
+        console.log(ComplaintInfo);
         try {
             const SubmitComplaint=await ComplaintsServices.MakeComplaint(ComplaintInfo);
             return res.status(201).send({

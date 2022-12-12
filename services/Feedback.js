@@ -15,9 +15,6 @@ module.exports.MakeFeedback=async(FeedbackInfo)=>{
             description:FeedbackInfo.description,
             date:FeedbackInfo.date,
             email:FeedbackInfo.email,
-          
-          
-      
         });
         const MakeFeedback=await Feedback.save();
         return MakeFeedback;
